@@ -24,8 +24,9 @@ def generate_diet(profile: Dict[str, Any]) -> Dict[str, Any]:
     返回:
       dict: 飲食計畫，包括：
         - calories_total (int): 目標總熱量
-        - meals (list): 每日餐次列表，每個含：
-          - type (str): 餐次類型（早餐、午餐等）
+        - name (str): 用戶名稱
+        - meals (list): 每日餐次列表（早餐、午餐、晚餐 3 餐），每個含：
+          - type (str): 餐次類型（早餐、午餐、晚餐）
           - calories (int): 該餐的熱量配置
           - items (list): 推薦食物清單
         - preferences (list): 飲食偏好
@@ -46,17 +47,17 @@ def generate_diet(profile: Dict[str, Any]) -> Dict[str, Any]:
         return {
             "error": f"熱量值超出範圍 (500-5000): {calories}",
             "calories_total": calories,
+            "name": name,
             "meals": [],
             "preferences": preferences,
             "notes": "請輸入 500-5000 之間的熱量值。",
         }
 
-    # 定義餐次結構與熱量分配
+    # 定義餐次結構與熱量分配（早餐 30%、午餐 40%、晚餐 30%）
     meal_structure = [
-        {"type": "早餐", "ratio": 0.25},
-        {"type": "午餐", "ratio": 0.35},
+        {"type": "早餐", "ratio": 0.30},
+        {"type": "午餐", "ratio": 0.40},
         {"type": "晚餐", "ratio": 0.30},
-        {"type": "點心", "ratio": 0.10},
     ]
 
     # 食物資料庫（按飲食偏好分類）
@@ -86,26 +87,21 @@ def generate_diet(profile: Dict[str, Any]) -> Dict[str, Any]:
                 "洋蔥 (80g)",
                 "蘑菇 (100g)",
             ],
-            "點心": [
-                "杏仁 (30g)",
-                "蘋果 (1 個)",
-                "香蕉 (1 根)",
-                "綠茶 (200ml)",
-                "黑巧克力 (20g)",
-                "牛奶 (200ml)",
-            ],
         },
-        "素食": {
+        "vegetarian": {
             "早餐": ["燕麥粥", "豆漿", "全麥麵包", "莓果", "優格"],
             "午餐": ["豆類飯", "豆腐", "蔬菜", "糙米", "堅果"],
             "晚餐": ["蕎麥麵", "毛豆", "時令蔬菜", "地瓜", "芝麻"],
-            "點心": ["杏仁", "水果", "豆奶", "無糖餅乾"],
         },
-        "無麩質": {
+        "vegan": {
+            "早餐": ["燕麥粥", "豆漿", "全麥麵包", "莓果"],
+            "午餐": ["豆類飯", "豆腐", "蔬菜", "糙米"],
+            "晚餐": ["蕎麥麵", "毛豆", "時令蔬菜", "地瓜"],
+        },
+        "gluten-free": {
             "早餐": ["米粥", "玉米片", "雞蛋", "藍莓", "堅果奶"],
             "午餐": ["白米飯", "雞肉", "蔬菜", "馬鈴薯", "橄欖油"],
             "晚餐": ["米麵", "魚肉", "番薯", "蔬菜", "酪梨"],
-            "點心": ["無麩質餅乾", "水果", "堅果", "無糖飲料"],
         },
     }
 
@@ -131,11 +127,13 @@ def generate_diet(profile: Dict[str, Any]) -> Dict[str, Any]:
         meals.append(meal)
 
     # 組合最終計畫
+    pref_str = f"preferences: {', '.join(preferences)}" if preferences else "preferences: none"
     plan: Dict[str, Any] = {
         "calories_total": calories,
+        "name": name,
         "meals": meals,
         "preferences": preferences if preferences else ["none"],
-        "notes": f"👤 {name}, 這是為你量身訂製的飲食計畫。請根據個人口味調整，並保持充足水分攝取！",
+        "notes": f"👤 {name}, 這是為你量身訂製的飲食計畫。{pref_str}\n請根據個人口味調整，並保持充足水分攝取！",
     }
 
     return plan
@@ -158,7 +156,7 @@ def main():
         "profile",
         nargs="?",
         default='{"calories": 2000}',
-        help="JSON 格式的用戶資料 (預設: {\"calories\": 2000})",
+        help='JSON 格式的用戶資料 (預設: {"calories": 2000})',
     )
 
     args = parser.parse_args()
@@ -175,7 +173,8 @@ def main():
 
     except json.JSONDecodeError as e:
         print(f"❌ JSON 格式錯誤: {e}")
-        print(f"請使用有效的 JSON 格式，例如: '{\"calories\": 2000}'")
+        example = '{"calories": 2000}'
+        print(f"請使用有效的 JSON 格式，例如: {example}")
         exit(1)
     except Exception as e:
         print(f"❌ 錯誤: {e}")
