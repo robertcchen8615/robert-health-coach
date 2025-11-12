@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robert-health-coach"
+version = "0.1.0"
+description = "Health coaching system with modular skills"
+authors = [
+    {name = "Robert Chen", email = "robert@example.com"},
+]
+requires-python = ">=3.9"
+dependencies = [
+    # Add shared dependencies here if any
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "black>=23.0",
+    "flake8>=6.0",
+]
+skill-4 = [
+    # Skill 4 specific deps (e.g., openai if needed)
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+pythonpath = ["."]
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311"]
+extend-exclude = '''
+^/(
+  venv
+  | \.venv
+  | \.pytest_cache
+  | __pycache__
+)/
+'''
+
+[tool.flake8]
+max-line-length = 100
+extend-ignore = ["E203", "W503"]
+exclude = [
+    ".git",
+    "__pycache__",
+    "venv",
+    ".venv",
+    ".pytest_cache",
+]
