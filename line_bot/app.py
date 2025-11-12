@@ -121,12 +121,15 @@ def handle_diet_command(user_id: str, args: list) -> str:
         plan = diet_generator.generate_diet(profile)
 
         # 格式化回覆訊息
-        response = f"🍽️ 您的每日飲食計畫\n"
+        response = f"🍽️ {plan['name']} 的每日飲食計畫\n"
         response += f"━━━━━━━━━━━━━━━\n"
-        response += f"目標熱量: {plan['calories_total']} kcal\n"
-        response += f"飲食偏好: {', '.join(plan.get('preferences', ['無'])) if plan.get('preferences') else '無'}\n\n"
+        response += f"每日總熱量: {plan['calories_total']} kcal\n"
+        pref_str = (", ".join(plan.get("preferences", ["無"]))
+                    if plan.get("preferences") and plan.get("preferences") != ["none"]
+                    else "無")
+        response += f"飲食偏好: {pref_str}\n\n"
 
-        for i, meal in enumerate(plan["meals"], 1):
+        for meal in plan["meals"]:
             response += f"【{meal['type']}】 {meal['calories']} kcal\n"
             for food in meal["items"]:
                 response += f"  • {food}\n"
@@ -244,7 +247,6 @@ def route_user_message(user_id: str, text: str) -> str:
 # ============================================================================
 # Webhook 事件處理
 # ============================================================================
-@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     """處理 LINE TextMessage 事件."""
     try:
@@ -270,6 +272,11 @@ def handle_message(event):
         logger.error(f"LINE API 錯誤: {e.status_code} {e.error.message}")
     except Exception as e:
         logger.error(f"訊息處理錯誤: {e}", exc_info=True)
+
+
+# 延遲註冊 handler（避免 handler is None 錯誤）
+if handler:
+    handler.add(MessageEvent, message=TextMessage)(handle_message)
 
 
 # ============================================================================
