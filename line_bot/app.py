@@ -14,9 +14,19 @@ import logging
 from typing import Dict, Any
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify
-from linebot import LineBotApi, WebhookHandler
-from linebot.exceptions import InvalidSignatureError, LineBotApiError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from linebot.v3.messaging import (
+    Configuration,
+    ApiClient,
+    MessagingApi,
+    ReplyMessageRequest,
+    TextMessage as V3TextMessage
+)
+from linebot.v3.webhooks import (
+    MessageEvent,
+    TextMessageContent
+)
+from linebot.v3.webhook import WebhookHandler
+from linebot.v3.exceptions import InvalidSignatureError
 
 # 載入環境變數
 load_dotenv()
@@ -38,7 +48,10 @@ if not CHANNEL_ACCESS_TOKEN or not CHANNEL_SECRET:
         "請在 .env 檔案中設定。"
     )
 
-line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN) if CHANNEL_ACCESS_TOKEN else None
+# 初始化 LINE Bot API v3
+configuration = Configuration(access_token=CHANNEL_ACCESS_TOKEN) if CHANNEL_ACCESS_TOKEN else None
+api_client = ApiClient(configuration) if configuration else None
+line_bot_api = MessagingApi(api_client) if api_client else None
 handler = WebhookHandler(CHANNEL_SECRET) if CHANNEL_SECRET else None
 
 # 匯入各 Skill 模組
@@ -261,22 +274,22 @@ def handle_message(event):
         # 發送回覆
         if line_bot_api:
             line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text=reply_text)
+                ReplyMessageRequest(
+                    reply_token=event.reply_token,
+                    messages=[V3TextMessage(text=reply_text)]
+                )
             )
             logger.info(f"✅ 已回覆 {user_id}")
         else:
             logger.warning("⚠️ LINE Bot API 未初始化")
 
-    except LineBotApiError as e:
-        logger.error(f"LINE API 錯誤: {e.status_code} {e.error.message}")
     except Exception as e:
         logger.error(f"訊息處理錯誤: {e}", exc_info=True)
 
 
 # 延遲註冊 handler（避免 handler is None 錯誤）
 if handler:
-    handler.add(MessageEvent, message=TextMessage)(handle_message)
+    handler.add(MessageEvent, message=TextMessageContent)(handle_message)
 
 
 # ============================================================================
