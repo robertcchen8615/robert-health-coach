@@ -58,7 +58,7 @@ def _format_diet_plan_for_line(plan: Dict) -> str:
     
     text = f"🍽️ {name} 的每日飲食計畫\n"
     text += "━━━━━━━━━━━━━━━\n"
-    text += f"目標熱量: {total} kcal\n"
+    text += f"每日總熱量: {total} kcal\n"
     text += f"飲食偏好: {prefs}\n\n"
     
     for meal in plan.get("meals", []):

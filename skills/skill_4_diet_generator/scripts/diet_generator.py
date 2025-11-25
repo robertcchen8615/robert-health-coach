@@ -53,10 +53,9 @@ def generate_diet(profile: Dict[str, Any]) -> Dict[str, Any]:
 
     # 定義餐次結構與熱量分配
     meal_structure = [
-        {"type": "早餐", "ratio": 0.25},
-        {"type": "午餐", "ratio": 0.35},
+        {"type": "早餐", "ratio": 0.30},
+        {"type": "午餐", "ratio": 0.40},
         {"type": "晚餐", "ratio": 0.30},
-        {"type": "點心", "ratio": 0.10},
     ]
 
     # 食物資料庫（按飲食偏好分類）
@@ -111,9 +110,16 @@ def generate_diet(profile: Dict[str, Any]) -> Dict[str, Any]:
 
     # 生成每日飲食計畫
     meals: List[Dict[str, Any]] = []
-    for meal_info in meal_structure:
+    remaining_calories = calories
+    for index, meal_info in enumerate(meal_structure):
         meal_type = meal_info["type"]
-        meal_calories = round(calories * meal_info["ratio"])
+
+        # 為了確保總熱量精準，最後一餐使用剩餘熱量
+        if index < len(meal_structure) - 1:
+            meal_calories = int(calories * meal_info["ratio"])
+            remaining_calories -= meal_calories
+        else:
+            meal_calories = remaining_calories
 
         # 選擇食物（考慮偏好）
         food_options = food_database.get("all", {}).get(meal_type, [])
@@ -131,11 +137,17 @@ def generate_diet(profile: Dict[str, Any]) -> Dict[str, Any]:
         meals.append(meal)
 
     # 組合最終計畫
+    preferences_display = preferences if preferences else ["none"]
+
     plan: Dict[str, Any] = {
         "calories_total": calories,
+        "name": name,
         "meals": meals,
-        "preferences": preferences if preferences else ["none"],
-        "notes": f"👤 {name}, 這是為你量身訂製的飲食計畫。請根據個人口味調整，並保持充足水分攝取！",
+        "preferences": preferences_display,
+        "notes": (
+            f"preferences: {', '.join(preferences_display)} | "
+            f"👤 {name}, 這是為你量身訂製的飲食計畫。請根據個人口味調整，並保持充足水分攝取！"
+        ),
     }
 
     return plan
@@ -175,7 +187,7 @@ def main():
 
     except json.JSONDecodeError as e:
         print(f"❌ JSON 格式錯誤: {e}")
-        print(f"請使用有效的 JSON 格式，例如: '{\"calories\": 2000}'")
+        print("請使用有效的 JSON 格式，例如: '{\"calories\": 2000}'")
         exit(1)
     except Exception as e:
         print(f"❌ 錯誤: {e}")
