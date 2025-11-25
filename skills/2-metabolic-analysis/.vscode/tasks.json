@@ -1,0 +1,59 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🚀 啟動 LINE Bot",
+      "type": "shell",
+      "command": "${workspaceFolder}/venv/bin/python",
+      "args": ["line-bot/app.py"],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🧪 執行所有測試",
+      "type": "shell",
+      "command": "${workspaceFolder}/venv/bin/pytest",
+      "args": ["tests/", "-v"],
+      "problemMatcher": [],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "🔍 執行 Linting (Flake8)",
+      "type": "shell",
+      "command": "${workspaceFolder}/venv/bin/flake8",
+      "args": ["skills/", "line-bot/", "agent/"],
+      "problemMatcher": []
+    },
+    {
+      "label": "✨ 格式化程式碼 (Black)",
+      "type": "shell",
+      "command": "${workspaceFolder}/venv/bin/black",
+      "args": ["skills/", "line-bot/", "agent/"],
+      "problemMatcher": []
+    },
+    {
+      "label": "🏥 Agent 健康檢查",
+      "type": "shell",
+      "command": "${workspaceFolder}/venv/bin/python",
+      "args": ["agent/health_check.py"],
+      "problemMatcher": []
+    },
+    {
+      "label": "🐳 Docker Build",
+      "type": "shell",
+      "command": "docker",
+      "args": ["build", "-t", "robert-health-coach:latest", "."],
+      "problemMatcher": []
+    }
+  ]
+}

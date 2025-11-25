@@ -236,7 +236,7 @@ Health check: http://localhost:5000/health
 使用者: /help
 機器人: 🤖 健康教練助手
        📋 可用命令:
-       
+
        🍽️ /diet [熱量] [偏好...]
        ...
 ```
@@ -440,7 +440,7 @@ python integrations/metabolic_analysis_adapter.py
 ## 常見問題
 
 ### Q: Webhook 無法驗證
-**A:** 
+**A:**
 - 確認 `LINE_CHANNEL_SECRET` 正確
 - 檢查伺服器是否正常運作
 - 確認 `/callback` 端點可以接收 POST 請求

@@ -10,11 +10,11 @@
 
 本專案提供一個可擴展的健康教練框架，包含以下 Skill：
 
-| Skill | 描述 | 狀態 |
-|-------|------|------|
-| **Skill 1** — Basic Info | 基本身體資訊收集與分析 | 📋 |
-| **Skill 2** — Metabolic Analysis | 代謝與營養分析 | 📊 |
-| **Skill 4** — Diet Generator | 個性化飲食計畫生成 | ✅ **完成** |
+| Skill                            | 描述                   | 狀態       |
+| -------------------------------- | ---------------------- | ---------- |
+| **Skill 1** — Basic Info         | 基本身體資訊收集與分析 | 📋          |
+| **Skill 2** — Metabolic Analysis | 代謝與營養分析         | 📊          |
+| **Skill 4** — Diet Generator     | 個性化飲食計畫生成     | ✅ **完成** |
 
 ### Skill 4：Diet Generator 🍽️
 
@@ -234,11 +234,11 @@ docker run --rm -it \
 
 本專案包含全面的單元測試：
 
-| 模組 | 測試案例 | 通過率 |
-|------|---------|-------|
-| Diet Generator | 8 | 100% ✅ |
-| LINE Adapter | 1 | 100% ✅ |
-| **總計** | **9** | **100%** |
+| 模組           | 測試案例 | 通過率   |
+| -------------- | -------- | -------- |
+| Diet Generator | 8        | 100% ✅   |
+| LINE Adapter   | 1        | 100% ✅   |
+| **總計**       | **9**    | **100%** |
 
 執行覆蓋率報告：
 ```bash
@@ -286,13 +286,13 @@ open htmlcov/index.html
 
 ## 📖 文檔
 
-| 文件 | 用途 |
-|------|------|
-| `CONTRIBUTING.md` | 如何貢獻、開發流程、commit 規範 |
-| `DEVELOPMENT.md` | 詳細開發指南、測試策略、建立新 Skill |
-| `DEPLOY.md` | 部署步驟、Docker、雲端部署建議 |
-| `PROGRESS.md` | 進度報告、統計數據、下一步計畫 |
-| `SKILL.md`（各 Skill） | 各 Skill 的功能說明 |
+| 文件                   | 用途                                 |
+| ---------------------- | ------------------------------------ |
+| `CONTRIBUTING.md`      | 如何貢獻、開發流程、commit 規範      |
+| `DEVELOPMENT.md`       | 詳細開發指南、測試策略、建立新 Skill |
+| `DEPLOY.md`            | 部署步驟、Docker、雲端部署建議       |
+| `PROGRESS.md`          | 進度報告、統計數據、下一步計畫       |
+| `SKILL.md`（各 Skill） | 各 Skill 的功能說明                  |
 
 ---
 
@@ -349,6 +349,6 @@ MIT License — 詳見 `LICENSE` 檔案
 
 ---
 
-**版本**：0.1.0  
-**最後更新**：2025 年 11 月 12 日  
+**版本**：0.1.0
+**最後更新**：2025 年 11 月 12 日
 **製作者**：Health Coach Development Team

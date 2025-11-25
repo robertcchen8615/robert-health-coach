@@ -14,15 +14,15 @@
 
 ### 程式碼貢獻
 
-| 類別 | 數量 | 說明 |
-|------|------|------|
-| 新增檔案 | 11 | Flask app、adapter、測試、文檔 |
-| 修改檔案 | 3 | line_adapter、README、DEPLOY |
-| 總新增行數 | 2,100+ | 代碼、測試、文檔 |
-| 核心程式碼 | 550+ | Flask application (app.py) |
-| Skill 適配器 | 370+ | 2 個 Skill 的 LINE 整合 |
-| 測試代碼 | 500+ | 40+ 個測試用例 |
-| 文檔 | 1,100+ | 4 份詳細文檔 |
+| 類別         | 數量   | 說明                           |
+| ------------ | ------ | ------------------------------ |
+| 新增檔案     | 11     | Flask app、adapter、測試、文檔 |
+| 修改檔案     | 3      | line_adapter、README、DEPLOY   |
+| 總新增行數   | 2,100+ | 代碼、測試、文檔               |
+| 核心程式碼   | 550+   | Flask application (app.py)     |
+| Skill 適配器 | 370+   | 2 個 Skill 的 LINE 整合        |
+| 測試代碼     | 500+   | 40+ 個測試用例                 |
+| 文檔         | 1,100+ | 4 份詳細文檔                   |
 
 ### 功能實現
 
@@ -72,13 +72,13 @@
 
 ### 新增文檔
 
-| 文檔 | 行數 | 內容 |
-|------|------|------|
-| **LINE_BOT_INTEGRATION.md** | 300+ | 完整整合指南、命令說明、部署方案 |
-| **LINE_BOT_QUICK_START.md** | 200+ | 5 分鐘快速開始、本地+雲端部署 |
-| **LINE_BOT_ARCHITECTURE.md** | 400+ | 系統架構圖、資料流、元件詳解 |
-| **BRANCH_PROTECTION_GUIDE.md** | 200+ | GitHub 分支保護配置步驟 |
-| **LINE_BOT_COMPLETION_REPORT.md** | 360+ | 完成報告、統計、下一步 |
+| 文檔                              | 行數 | 內容                             |
+| --------------------------------- | ---- | -------------------------------- |
+| **LINE_BOT_INTEGRATION.md**       | 300+ | 完整整合指南、命令說明、部署方案 |
+| **LINE_BOT_QUICK_START.md**       | 200+ | 5 分鐘快速開始、本地+雲端部署    |
+| **LINE_BOT_ARCHITECTURE.md**      | 400+ | 系統架構圖、資料流、元件詳解     |
+| **BRANCH_PROTECTION_GUIDE.md**    | 200+ | GitHub 分支保護配置步驟          |
+| **LINE_BOT_COMPLETION_REPORT.md** | 360+ | 完成報告、統計、下一步           |
 
 ### 文檔亮點
 
@@ -147,9 +147,9 @@ f907823 - docs: 添加 LINE Bot 快速開始和系統架構文檔
 ### 整個專案的 Git 歷程
 
 ```
-64420ab (HEAD -> main, origin/main) 
+64420ab (HEAD -> main, origin/main)
         docs: 添加 LINE Bot 整合完成報告
-        
+
 f907823 docs: 添加 LINE Bot 快速開始和系統架構文檔
 
 4b550e3 feat: 整合 LINE Bot — 連接 webhook 到各 Skill
@@ -398,6 +398,6 @@ Except:
 
 ---
 
-*最後更新: 2025-11-12*  
-*專案版本: 1.0.0*  
+*最後更新: 2025-11-12*
+*專案版本: 1.0.0*
 *状態: ✅ 完成*

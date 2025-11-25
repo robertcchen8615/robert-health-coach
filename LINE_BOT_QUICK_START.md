@@ -191,24 +191,24 @@ gcloud run deploy health-coach-bot \
 
 ## 📋 檔案清單
 
-| 檔案 | 說明 |
-|------|------|
-| `line-bot/app.py` | 主應用程式 (550+ 行) |
-| `line-bot/config.py` | 配置常數 |
-| `line-bot/requirements.txt` | 依賴套件 |
-| `integrations/line_adapter.py` | Skill 4 adapter |
-| `integrations/metabolic_analysis_adapter.py` | Skill 2 adapter |
-| `tests/test_line_bot_app.py` | 單元測試 |
-| `tests/test_line_bot_integration.py` | 整合測試 |
-| `LINE_BOT_INTEGRATION.md` | 完整文檔 (300+ 行) |
-| `.env.example` | 環境變數範本 |
+| 檔案                                         | 說明                 |
+| -------------------------------------------- | -------------------- |
+| `line-bot/app.py`                            | 主應用程式 (550+ 行) |
+| `line-bot/config.py`                         | 配置常數             |
+| `line-bot/requirements.txt`                  | 依賴套件             |
+| `integrations/line_adapter.py`               | Skill 4 adapter      |
+| `integrations/metabolic_analysis_adapter.py` | Skill 2 adapter      |
+| `tests/test_line_bot_app.py`                 | 單元測試             |
+| `tests/test_line_bot_integration.py`         | 整合測試             |
+| `LINE_BOT_INTEGRATION.md`                    | 完整文檔 (300+ 行)   |
+| `.env.example`                               | 環境變數範本         |
 
 ---
 
 ## 🆘 常見問題
 
 ### Q: Webhook 無法驗證？
-**A:** 
+**A:**
 - 確認 `LINE_CHANNEL_SECRET` 正確
 - 確認伺服器正常運作
 - 檢查防火牆設定（允許 443 埠）

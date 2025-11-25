@@ -1,0 +1,43 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: LINE Bot",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/line-bot/app.py",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Python: Test Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": false
+    },
+    {
+      "name": "Python: Main Agent",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "agent.core.agent",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "justMyCode": false,
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Python: Skill 2 (Metabolic Analysis)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/skills/2-metabolic-analysis/scripts/analyze_logs.py",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "args": []
+    }
+  ]
+}

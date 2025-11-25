@@ -45,34 +45,34 @@ def handle_line_event(event_body: Dict) -> Dict:
 
 def _format_diet_plan_for_line(plan: Dict) -> str:
     """將飲食計畫格式化為 LINE 訊息。
-    
+
     參數:
         plan: 由 diet_generator.generate_diet() 返回的計畫字典
-    
+
     返回:
         格式化的訊息文本
     """
     total = plan.get("calories_total", 0)
     name = plan.get("name", "User")
     prefs = ", ".join(plan.get("preferences", [])) if plan.get("preferences") else "無特殊偏好"
-    
+
     text = f"🍽️ {name} 的每日飲食計畫\n"
     text += "━━━━━━━━━━━━━━━\n"
     text += f"目標熱量: {total} kcal\n"
     text += f"飲食偏好: {prefs}\n\n"
-    
+
     for meal in plan.get("meals", []):
         meal_type = meal.get("type", "未知")
         calories = meal.get("calories", 0)
         items = meal.get("items", [])
-        
+
         text += f"【{meal_type}】 {calories} kcal\n"
         for item in items:
             text += f"  • {item}\n"
         text += "\n"
-    
+
     text += f"📝 {plan.get('notes', '祝用餐愉快！')}"
-    
+
     return text
 
 
