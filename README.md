@@ -352,3 +352,27 @@ MIT License — 詳見 `LICENSE` 檔案
 **版本**：0.1.0
 **最後更新**：2025 年 11 月 12 日
 **製作者**：Health Coach Development Team
+
+---
+
+## 🗂️ 整理 ChatGPT 專案近六個月每日報表
+
+如果你已經從 ChatGPT 匯出 `conversations.json`，可以用下列工具快速整理成「每日報表」：
+
+```bash
+python scripts/organize_chatgpt_daily_reports.py /path/to/conversations.json
+```
+
+預設會輸出：
+- `daily_reports_last_6_months.csv`
+- `daily_reports_last_6_months.md`
+
+可自訂參數：
+
+```bash
+python scripts/organize_chatgpt_daily_reports.py /path/to/conversations.json \
+  --months 6 \
+  --end-date 2026-04-04 \
+  --csv-output reports.csv \
+  --markdown-output reports.md
+```
